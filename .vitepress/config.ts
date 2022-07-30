@@ -1,5 +1,7 @@
 import path from 'path'
+import versions from './versions'
 
+const latest = versions[0]
 
 const nav = [
   {
@@ -8,19 +10,29 @@ const nav = [
   },
   {
     text: '文档',
-    activeMatch: `^/(guide|style-guide|cookbook|examples)/`,
-    items: [
-      { text: '入门', link: '/getting-started' },
-      { text: '高级用法', link: '/advanced-usage/' }
-    ]
-  }
+    activeMatch: `^/([0-9]\.x)/`,
+    items: versions.map((version) => ({
+      text: version,
+      link: `/${version}/`
+    }))
+  },
 ]
 
+export const sidebar = versions.reduce(
+  (sidebars, version) => ({
+    ...sidebars,
+    [`/${version}/`]: require(path.join(
+      __dirname,
+      `../src/${version}/sidebar`
+    ))
+  }),
+  {}
+)
 
 export default {
   lang: 'zh-CN',
   title: 'Soketi',
-  description: 'Soketi is your simple, fast, and resilient open-source WebSockets server.',
+  description: 'Soketi 是您简单、快速且有弹性的开源 WebSockets 服务器。',
   srcDir: 'src',
   srcExclude: [],
   scrollOffset: 'header',
@@ -33,11 +45,12 @@ export default {
 
   themeConfig: {
     nav,
+    sidebar,
 
     algolia: {
-      indexName: 'easywechat',
-      appId: 'X3KJL5SQXD',
-      apiKey: '5c5ba71b35c48411f245bef4c695fc36'
+      indexName: 'lll',
+      appId: '123123',
+      apiKey: '123123'
       // searchParameters: {
       //   facetFilters: ['version:v3']
       // }

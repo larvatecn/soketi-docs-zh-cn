@@ -4,7 +4,10 @@ title: Soketi - Soketi is your simple, fast, and resilient open-source WebSocket
 ---
 
 <script lang="ts" setup>
+import versions from '@theme/../versions'
 import {withBase} from 'vitepress'
+
+let latestVersion = versions[0]
 
 </script>
 
@@ -44,7 +47,7 @@ import {withBase} from 'vitepress'
           </svg>
         </code>
       </button>
-      <a :href="withBase('docs/index')"
+      <a :href="withBase(`/${latestVersion}/`)"
         class="inline-flex items-center space-around text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
       >
         <span>立即开始</span>
